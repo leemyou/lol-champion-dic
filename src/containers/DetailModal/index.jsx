@@ -1,7 +1,18 @@
-import { Box, Chip, Dialog, DialogContent, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { ChampDetail } from "./style";
+import { Cancel } from "@mui/icons-material";
+import {
+  Box,
+  Chip,
+  DialogContent,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 export const DetailModal = ({
+  bgImgMb = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg",
   bgImg = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
   champName = "아트록스",
   champTitle = "다르킨의 검",
@@ -10,43 +21,49 @@ export const DetailModal = ({
 }) => {
   const [open, setOpen] = useState(true);
 
+  const theme = useTheme();
+  const isFullScreenXS = useMediaQuery(theme.breakpoints.down("sm")); // full screen의 breakpoints를 걸어주기 위한 코드
+
   const handleClose = () => {
-    console.log("close");
     setOpen(false);
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={"lg"}>
+    <ChampDetail
+      open={open}
+      onClose={handleClose}
+      fullWidth={true}
+      maxWidth={"lg"}
+      fullScreen={isFullScreenXS}
+    >
       <DialogContent
+        className="dialog-content"
         sx={{
-          backgroundImage: `url(${bgImg})`,
-          backgroundPosition: "center",
-          objectFit: "cover",
-          width: "100%",
-          height: "80vh",
-          padding: 0,
+          backgroundImage: `url(${isFullScreenXS ? bgImgMb : bgImg})`,
+          height: { xs: "100vh", sm: "90vh", md: "80vh" },
         }}
       >
         <Box
+          className="dialog-content-box"
           sx={{
-            background: "linear-gradient(45deg, #ffffff, #ffffff42, #fff0)",
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
             padding: {
-              xs: "10px",
+              xs: "20px 16px",
               sm: "30px",
               md: "50px 52px",
               lg: "70px 72px",
             },
           }}
         >
+          <IconButton
+            className="dialog-content-box-cancle"
+            size="large"
+            onClick={handleClose}
+            children={<Cancel />}
+          />
           <Typography
+            className="dialog-content-box-subtitle"
             variant="h5"
             fontWeight={"regular"}
-            sx={{ fontStyle: "italic" }}
           >
             {champTitle}
           </Typography>
@@ -59,11 +76,14 @@ export const DetailModal = ({
               <Chip label={`#${tag}`} size="small" />
             ))}
           </div>
-          <Typography variant="body1" sx={{ width: "65%", mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ width: { xs: "100%", sm: "65%" }, mt: 2 }}
+          >
             {champLore}
           </Typography>
         </Box>
       </DialogContent>
-    </Dialog>
+    </ChampDetail>
   );
 };
