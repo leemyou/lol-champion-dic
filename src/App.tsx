@@ -1,7 +1,8 @@
+import React from "react";
 import "./App.css";
 import { DetailModal, Header, Main } from "./containers";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
@@ -9,6 +10,6 @@ function App() {
       <DetailModal />
     </div>
   );
-}
+};
 
 export default App;

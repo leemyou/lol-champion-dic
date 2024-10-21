@@ -1,7 +1,21 @@
 import React from "react";
 import { Box, Chip, Paper, Typography } from "@mui/material";
 
-export const ChampionCard = ({ name, image, tags }) => {
+type ChampionCardProps = {
+  name: string;
+  image: {
+    full: string;
+    sprite: string;
+    group: string;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  };
+  tags: string[];
+};
+
+export const ChampionCard = ({ name, image, tags }: ChampionCardProps) => {
   console.log(image);
   const test = image.full.split(".");
   const imgUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${test[0]}_0.jpg`;
@@ -49,7 +63,11 @@ export const ChampionCard = ({ name, image, tags }) => {
           }}
         >
           {tags.map((tag) => (
-            <Chip label={`#${tag}`} size="small" color="grey" />
+            <Chip
+              label={`#${tag}`}
+              size="small"
+              // color="grey"
+            />
           ))}
         </Box>
       </div>
