@@ -7,7 +7,10 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material";
 import { muiTheme } from "./styles/ThemeMuiStyle";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+// getElementById가 null이 아님을 보장
+const rootElement = document.getElementById("root") as HTMLElement;
+
+const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={muiTheme}>

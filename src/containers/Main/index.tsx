@@ -6,19 +6,53 @@ import {
   IconButton,
   InputAdornment,
   OutlinedInput,
-  Paper,
 } from "@mui/material";
 import { SearchRounded } from "@mui/icons-material";
 import { ChampionCard } from "../ChampionCard";
+
+interface Champion {
+  version: string;
+  id: string;
+  key: string;
+  name: string;
+  title: string;
+  blurb: string;
+  info: {
+    attack: number;
+    defense: number;
+    magic: number;
+    difficulty: number;
+  };
+  image: {
+    full: string;
+    sprite: string;
+    group: string;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  };
+  tags: string[];
+  partype: string;
+  stats: {
+    [key: string]: number;
+  };
+}
+
+interface ChampionData {
+  [key: string]: Champion;
+}
 
 export const Main = () => {
   const handleSearch = () => {
     console.log("search");
   };
 
-  const handleEnter = (event) => {
+  const handleEnter = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     if (event.key === "Enter") {
-      // 엔터 키가 눌렸을 때 실행할 동작
+      // 엔터키가 눌렸을 때 실행할 로직
       handleSearch();
     }
   };
@@ -27,7 +61,7 @@ export const Main = () => {
     console.log("run delete");
   };
 
-  const testData = {
+  const testData: ChampionData = {
     Aatrox: {
       version: "14.20.1",
       id: "Aatrox",
@@ -1007,7 +1041,7 @@ export const Main = () => {
       <Grid2 size={{ xs: 6, md: 8 }} sx={{ mx: "auto", mb: "12px" }}>
         <OutlinedInput
           fullWidth
-          variant="outlined"
+          // variant="outlined"
           placeholder="Search"
           onKeyDown={handleEnter}
           endAdornment={
