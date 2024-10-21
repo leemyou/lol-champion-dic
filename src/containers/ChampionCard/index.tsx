@@ -16,7 +16,6 @@ type ChampionCardProps = {
 };
 
 export const ChampionCard = ({ name, image, tags }: ChampionCardProps) => {
-  console.log(image);
   const test = image.full.split(".");
   const imgUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${test[0]}_0.jpg`;
 
