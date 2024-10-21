@@ -1,14 +1,17 @@
 import React from "react";
-import "./App.css";
 import { DetailModal, Header, Main } from "./containers";
+import { ThemeProvider } from "@mui/material";
+import { muiTheme } from "./styles/ThemeMuiStyle";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Header />
-      <Main />
-      <DetailModal />
-    </div>
+    <>
+      <ThemeProvider theme={muiTheme}>
+        <Header />
+        <Main />
+        <DetailModal />
+      </ThemeProvider>
+    </>
   );
 };
 
