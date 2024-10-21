@@ -5,6 +5,7 @@ export const LIGHT = {
   grey: blueGrey[300],
   bg: blueGrey[50],
   text: "#000",
+  bgCardChip: "#ffffff70",
 };
 
 export const DARK = {
@@ -12,4 +13,5 @@ export const DARK = {
   grey: blueGrey[500],
   bg: "#000",
   text: blueGrey[50],
+  bgCardChip: "#00000070",
 };

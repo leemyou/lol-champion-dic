@@ -62,11 +62,7 @@ export const ChampionCard = ({ name, image, tags }: ChampionCardProps) => {
           }}
         >
           {tags.map((tag) => (
-            <Chip
-              label={`#${tag}`}
-              size="small"
-              // color="grey"
-            />
+            <Chip label={`#${tag}`} size="small" />
           ))}
         </Box>
       </div>

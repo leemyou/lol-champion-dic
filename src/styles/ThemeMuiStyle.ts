@@ -9,6 +9,14 @@ export const LightTheme = createTheme({
     //     disableRipple: true,
     //   },
     // },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: LIGHT.bgCardChip,
+          color: "#000",
+        },
+      },
+    },
   },
   palette: {
     mode: "light",
@@ -24,7 +32,16 @@ export const LightTheme = createTheme({
 });
 
 export const DarkTheme = createTheme({
-  components: {},
+  components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: DARK.bgCardChip,
+          color: "#fff",
+        },
+      },
+    },
+  },
   palette: {
     mode: "dark",
     primary: {

@@ -1059,8 +1059,12 @@ export const Main = () => {
         sx={{ mx: "auto", mb: { xs: "48px", sm: "64px", md: "100px" } }}
       >
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-          <Chip label="#전사" onDelete={handleDelete} />
-          <Chip label="#근거리 챔피언" onDelete={handleDelete} />
+          <Chip label="#전사" onDelete={handleDelete} variant="outlined" />
+          <Chip
+            label="#근거리 챔피언"
+            onDelete={handleDelete}
+            variant="outlined"
+          />
         </Box>
       </Grid2>
 
