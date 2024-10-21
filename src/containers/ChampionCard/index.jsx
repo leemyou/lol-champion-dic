@@ -20,9 +20,9 @@ export const ChampionCard = ({ name, image, tags }) => {
         backgroundPosition: "top",
         backgroundPositionY: "-10px",
         backgroundColor: "#000",
-        position: "relative",
         cursor: "pointer",
       }}
+      style={{ position: "relative" }}
     >
       <div
         style={{
