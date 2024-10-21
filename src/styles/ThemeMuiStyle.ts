@@ -13,7 +13,16 @@ export const LightTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: LIGHT.bgCardChip,
-          color: "#000",
+          color: LIGHT.text,
+          variants: [
+            {
+              props: { itemType: "detail" },
+              style: {
+                backgroundColor: LIGHT.bgDetailChip,
+                color: LIGHT.text,
+              },
+            },
+          ],
         },
       },
     },
@@ -21,7 +30,7 @@ export const LightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: LIGHT.primary,
+      main: LIGHT.bgDetailChip,
       contrastText: LIGHT.text,
     },
     secondary: {
@@ -37,7 +46,16 @@ export const DarkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: DARK.bgCardChip,
-          color: "#fff",
+          color: DARK.text,
+          variants: [
+            {
+              props: { itemType: "detail" },
+              style: {
+                backgroundColor: DARK.bgDetailChip,
+                color: DARK.text,
+              },
+            },
+          ],
         },
       },
     },
@@ -49,7 +67,7 @@ export const DarkTheme = createTheme({
       contrastText: DARK.text,
     },
     secondary: {
-      main: DARK.grey,
+      main: DARK.bgDetailChip,
       contrastText: DARK.text,
     },
   },
