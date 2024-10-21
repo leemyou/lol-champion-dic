@@ -1,28 +1,39 @@
 import { createTheme } from "@mui/material";
-import { blueGrey, indigo } from "@mui/material/colors";
+import { DARK, LIGHT } from "../constants/colors";
 
-export const muiTheme = createTheme({
+export const LightTheme = createTheme({
   components: {
     // Name of the component
-    MuiButtonBase: {
-      defaultProps: {
-        // The props to change the default for.
-        disableRipple: true, // No more ripple, on the whole application 💣!
-      },
-    },
+    // MuiButtonBase: {
+    //   defaultProps: {
+    //     disableRipple: true,
+    //   },
+    // },
   },
   palette: {
+    mode: "light",
     primary: {
-      light: indigo[700],
-      main: indigo[700],
-      dark: indigo[900],
-      contrastText: "#fff",
+      main: LIGHT.primary,
+      contrastText: LIGHT.text,
     },
     secondary: {
-      light: blueGrey[300],
-      main: blueGrey[500],
-      dark: blueGrey[700],
-      contrastText: "#fff",
+      main: LIGHT.grey,
+      contrastText: LIGHT.text,
+    },
+  },
+});
+
+export const DarkTheme = createTheme({
+  components: {},
+  palette: {
+    mode: "dark",
+    primary: {
+      main: DARK.primary,
+      contrastText: DARK.text,
+    },
+    secondary: {
+      main: DARK.grey,
+      contrastText: DARK.text,
     },
   },
 });
