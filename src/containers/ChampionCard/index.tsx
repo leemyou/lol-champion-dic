@@ -16,7 +16,6 @@ type ChampionCardProps = {
 };
 
 export const ChampionCard = ({ name, image, tags }: ChampionCardProps) => {
-  console.log(image);
   const test = image.full.split(".");
   const imgUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${test[0]}_0.jpg`;
 
@@ -63,11 +62,7 @@ export const ChampionCard = ({ name, image, tags }: ChampionCardProps) => {
           }}
         >
           {tags.map((tag) => (
-            <Chip
-              label={`#${tag}`}
-              size="small"
-              // color="grey"
-            />
+            <Chip label={`#${tag}`} size="small" />
           ))}
         </Box>
       </div>

@@ -10,6 +10,9 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../recoils/theme";
+import { ThemeEnums } from "../../enums/theme";
 
 export const DetailModal = ({
   bgImgMb = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg",
@@ -21,8 +24,10 @@ export const DetailModal = ({
 }) => {
   const [open, setOpen] = useState(true);
 
-  const theme = useTheme();
-  const isFullScreenXS = useMediaQuery(theme.breakpoints.down("sm")); // full screen의 breakpoints를 걸어주기 위한 코드
+  const isLightTheme = useRecoilValue(themeState) === ThemeEnums.LIGHT;
+
+  const screen = useTheme();
+  const isFullScreenXS = useMediaQuery(screen.breakpoints.down("sm")); // full screen의 breakpoints를 걸어주기 위한 코드
 
   const handleClose = () => {
     setOpen(false);
@@ -52,6 +57,9 @@ export const DetailModal = ({
               md: "50px 52px",
               lg: "70px 72px",
             },
+            background: isLightTheme
+              ? "linear-gradient(45deg, #ffffff, #ffffff42, #fff0)"
+              : "linear-gradient(45deg, #000000, #00000042, #fff0)",
           }}
         >
           <IconButton
@@ -64,20 +72,22 @@ export const DetailModal = ({
             className="dialog-content-box-subtitle"
             variant="h5"
             fontWeight={"regular"}
+            textAlign={"left"}
           >
             {champTitle}
           </Typography>
 
-          <Typography variant="h2" fontWeight={"bold"}>
+          <Typography variant="h2" fontWeight={"bold"} textAlign={"left"}>
             {champName}
           </Typography>
-          <div>
+          <div className="dialog-content-box-tags">
             {champTags.map((tag) => (
-              <Chip label={`#${tag}`} size="small" />
+              <Chip label={`#${tag}`} size="small" itemType="detail" />
             ))}
           </div>
           <Typography
             variant="body1"
+            textAlign={"left"}
             sx={{ width: { xs: "100%", sm: "65%" }, mt: 2 }}
           >
             {champLore}

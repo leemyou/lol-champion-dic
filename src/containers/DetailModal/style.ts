@@ -10,7 +10,6 @@ export const ChampDetail = styled(Dialog)`
     padding: 0;
 
     &-box {
-      background: linear-gradient(45deg, #ffffff, #ffffff42, #fff0);
       width: 100%;
       height: 100%;
       display: flex;
@@ -25,6 +24,12 @@ export const ChampDetail = styled(Dialog)`
 
       &-subtitle {
         font-style: italic;
+      }
+
+      &-tags {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
     }
   }

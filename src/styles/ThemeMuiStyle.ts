@@ -1,28 +1,74 @@
 import { createTheme } from "@mui/material";
-import { blueGrey, indigo } from "@mui/material/colors";
+import { DARK, LIGHT } from "../constants/colors";
 
-export const muiTheme = createTheme({
+export const LightTheme = createTheme({
   components: {
     // Name of the component
-    MuiButtonBase: {
-      defaultProps: {
-        // The props to change the default for.
-        disableRipple: true, // No more ripple, on the whole application 💣!
+    // MuiButtonBase: {
+    //   defaultProps: {
+    //     disableRipple: true,
+    //   },
+    // },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: LIGHT.bgCardChip,
+          color: LIGHT.text,
+          variants: [
+            {
+              props: { itemType: "detail" },
+              style: {
+                backgroundColor: LIGHT.bgDetailChip,
+                color: LIGHT.text,
+              },
+            },
+          ],
+        },
       },
     },
   },
   palette: {
+    mode: "light",
     primary: {
-      light: indigo[700],
-      main: indigo[700],
-      dark: indigo[900],
-      contrastText: "#fff",
+      main: LIGHT.bgDetailChip,
+      contrastText: LIGHT.text,
     },
     secondary: {
-      light: blueGrey[300],
-      main: blueGrey[500],
-      dark: blueGrey[700],
-      contrastText: "#fff",
+      main: LIGHT.grey,
+      contrastText: LIGHT.text,
+    },
+  },
+});
+
+export const DarkTheme = createTheme({
+  components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: DARK.bgCardChip,
+          color: DARK.text,
+          variants: [
+            {
+              props: { itemType: "detail" },
+              style: {
+                backgroundColor: DARK.bgDetailChip,
+                color: DARK.text,
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+  palette: {
+    mode: "dark",
+    primary: {
+      main: DARK.primary,
+      contrastText: DARK.text,
+    },
+    secondary: {
+      main: DARK.bgDetailChip,
+      contrastText: DARK.text,
     },
   },
 });
