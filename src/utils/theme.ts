@@ -1,4 +1,4 @@
-import { ThemeEnums } from "../enums/theme";
+import { ThemeEnums } from "@enums/theme";
 
 // 현재 사용자의 시스템 테마를 확인
 export const getUserTheme = (): ThemeEnums => {
