@@ -12,4 +12,20 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
+  resolve: {
+    alias: [
+      { find: "@", replacement: "/src" },
+      { find: "@api", replacement: "/src/api" },
+      { find: "@assets", replacement: "/src/assets" },
+      { find: "@components", replacement: "/src/components" },
+      { find: "@constants", replacement: "/src/constants" },
+      { find: "@containers", replacement: "/src/containers" },
+      { find: "@enums", replacement: "/src/enums" },
+      { find: "@hooks", replacement: "/src/hooks" },
+      { find: "@pages", replacement: "/src/pages" },
+      { find: "@recoils", replacement: "/src/recoils" },
+      { find: "@styles", replacement: "/src/styles" },
+      { find: "@utils", replacement: "/src/utils" },
+    ],
+  },
 });
