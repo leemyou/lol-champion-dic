@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useChampionList } from "@/apis";
 import { champListToChampNode } from "@/utils/champion";
-import ForceGraph3D from "react-force-graph-3d";
+import ForceGraph3D, { NodeObject } from "react-force-graph-3d";
 import * as THREE from "three";
 
 export const NodeContainer: React.FC = () => {
@@ -36,12 +36,18 @@ export const NodeContainer: React.FC = () => {
     return sprite;
   };
 
+  const handleClickNode = (node: NodeObject) => {
+    alert(`node Click : ${node.id}`);
+  };
+
   return (
     <ForceGraph3D
       graphData={gData}
       nodeThreeObject={handleNodeThreeObject}
       backgroundColor="#ffffff00"
-      linkColor={"#ccc"}
+      onNodeClick={handleClickNode}
+      linkOpacity={1}
+      linkWidth={0.5}
     />
   );
 };
