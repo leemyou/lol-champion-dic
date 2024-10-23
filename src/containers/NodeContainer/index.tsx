@@ -5,7 +5,7 @@ import RelationGraph, {
   RGJsonData,
   RGOptions,
 } from "relation-graph/react";
-import champRelation from "../../assets/data/champRelation.json";
+import champRelation from "@assets/data/champRelation.json";
 
 type NodeContainerProps = {};
 

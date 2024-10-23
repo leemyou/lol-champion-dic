@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { DARK, LIGHT } from "../constants/colors";
+import { DARK, LIGHT } from "@constants/colors";
 
 export const LightTheme = createTheme({
   components: {

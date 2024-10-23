@@ -11,8 +11,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
-import { themeState } from "../../recoils/theme";
-import { ThemeEnums } from "../../enums/theme";
+import { themeState } from "@recoils/theme";
+import { ThemeEnums } from "@enums/theme";
 
 export const DetailModal = ({
   bgImgMb = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg",
