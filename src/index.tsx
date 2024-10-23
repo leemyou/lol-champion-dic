@@ -9,6 +9,7 @@ import { DarkTheme, LightTheme } from "./styles/ThemeMuiStyle";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { ThemeEnums } from "./enums/theme";
 import { themeState } from "./recoils/theme";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // getElementById가 null이 아님을 보장
 const rootElement = document.getElementById("root") as HTMLElement;
@@ -19,10 +20,15 @@ const root = ReactDOM.createRoot(rootElement);
 const AppWithTheme: React.FC = () => {
   const theme: ThemeEnums = useRecoilValue(themeState);
 
+  // react query
+  const queryClient = new QueryClient();
+
   return (
     <ThemeProvider theme={theme === ThemeEnums.LIGHT ? LightTheme : DarkTheme}>
-      <CssBaseline />
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <CssBaseline />
+        <App />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
