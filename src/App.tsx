@@ -1,12 +1,13 @@
 import React from "react";
-import { DetailModal, Header, Main } from "./containers";
+import NodeRelation from "./pages/NodeRelation";
 
 const App: React.FC = () => {
   return (
     <>
-      <Header />
+      <NodeRelation />
+      {/*
       <Main />
-      <DetailModal />
+      <DetailModal /> */}
     </>
   );
 };
