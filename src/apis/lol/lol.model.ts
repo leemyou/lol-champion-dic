@@ -54,12 +54,3 @@ export interface ResChampList {
   version: string;
   data: IChampion;
 }
-
-export interface ResultChampList {
-  data: {
-    type: string;
-    format: string;
-    version: string;
-    data: IChampion;
-  };
-}

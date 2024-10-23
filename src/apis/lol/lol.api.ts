@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ResultChampList } from "./lol.model";
+import { ResChampList } from "./lol.model";
 
 // Axios 인스턴스 생성
 const Axios = axios.create({
@@ -12,7 +12,7 @@ const Axios = axios.create({
 // TODO: 추후 파라미터(버전, 국가) 추가 필요
 const getChampionList = async () => {
   return await Axios.get("/14.20.1/data/ko_KR/champion.json", {}).then(
-    (res: ResultChampList) => res.data
+    (res: { data: ResChampList }) => res.data
   );
 };
 
