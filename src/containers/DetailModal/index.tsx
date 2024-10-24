@@ -10,12 +10,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useRecoilValue } from "recoil";
-import { themeState } from "@recoils/theme";
-import { ThemeEnums } from "@enums/theme";
 import { useModal } from "@/hooks/useModal";
 import { useChampionDetail } from "@/apis";
 import { IChampionDetail } from "@/apis/lol/lol.model";
+import { useCustomTheme } from "@/hooks/useCustomTheme";
 
 type championData = {
   bgImgMb: string;
@@ -30,8 +28,9 @@ type DetailModalProps = {};
 
 export const DetailModal: React.FC<DetailModalProps> = ({}) => {
   const { closeModal, open, championId } = useModal();
+  const { isThemeLight } = useCustomTheme();
+
   const { data } = useChampionDetail({ champId: championId });
-  const isLightTheme = useRecoilValue(themeState) === ThemeEnums.LIGHT;
 
   const screen = useTheme();
   const isFullScreenXS = useMediaQuery(screen.breakpoints.down("sm")); // full screen의 breakpoints를 걸어주기 위한 코드
@@ -78,7 +77,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({}) => {
               md: "50px 52px",
               lg: "70px 72px",
             },
-            background: isLightTheme
+            background: isThemeLight
               ? "linear-gradient(45deg, #ffffff, #ffffff42, #fff0)"
               : "linear-gradient(45deg, #000000, #00000042, #fff0)",
           }}
