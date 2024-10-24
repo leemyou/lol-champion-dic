@@ -1,5 +1,10 @@
 import axios from "axios";
-import { ReqChampDetail, ResChampDetail, ResChampList } from "./lol.model";
+import {
+  ReqChampDetail,
+  ReqChampList,
+  ResChampDetail,
+  ResChampList,
+} from "./lol.model";
 
 // Axios 인스턴스 생성
 const Axios = axios.create({
@@ -10,8 +15,8 @@ const Axios = axios.create({
 });
 
 // TODO: 추후 파라미터(버전, 국가) 추가 필요
-const getChampionList = async () => {
-  return await Axios.get("/14.20.1/data/ko_KR/champion.json", {}).then(
+const getChampionList = async ({ language }: ReqChampList) => {
+  return await Axios.get(`/14.20.1/data/${language}/champion.json`, {}).then(
     (res: { data: ResChampList }) => res.data
   );
 };
@@ -19,7 +24,7 @@ const getChampionList = async () => {
 // TODO: 추후 파라미터(버전, 국가) 추가 필요
 const getChampionDetail = async (param: ReqChampDetail) => {
   return await Axios.get(
-    `/14.20.1/data/ko_KR/champion/${param.champId}.json`,
+    `/14.20.1/data/${param.language}/champion/${param.champId}.json`,
     {}
   ).then((res: { data: ResChampDetail }) => res.data);
 };

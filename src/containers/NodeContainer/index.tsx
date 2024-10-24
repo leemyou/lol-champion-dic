@@ -4,10 +4,14 @@ import { champListToChampNode } from "@/utils/champion";
 import ForceGraph3D, { NodeObject } from "react-force-graph-3d";
 import * as THREE from "three";
 import { useModal } from "@/hooks/useModal";
+import { useFilter } from "@/hooks/useFilter";
 
 export const NodeContainer: React.FC = () => {
   const { openModal } = useModal();
-  const { data: champList } = useChampionList();
+
+  const { language } = useFilter();
+
+  const { data: champList } = useChampionList({ language: language });
 
   // champList가 없는 경우, 빈 배열을 반환
   const championList = useMemo(() => {

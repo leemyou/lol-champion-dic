@@ -1,12 +1,19 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { getChampionDetail, getChampionList } from "./lol.api";
-import { ReqChampDetail, ResChampDetail, ResChampList } from "./lol.model";
+import {
+  ReqChampDetail,
+  ReqChampList,
+  ResChampDetail,
+  ResChampList,
+} from "./lol.model";
 
-export const useChampionList = (): UseQueryResult<ResChampList, {}> => {
+export const useChampionList = (
+  param: ReqChampList
+): UseQueryResult<ResChampList, {}> => {
   return useQuery({
     queryKey: ["championList"],
     queryFn: async () => {
-      return (await getChampionList()) as ResChampList;
+      return (await getChampionList(param)) as ResChampList;
     },
   });
 };
