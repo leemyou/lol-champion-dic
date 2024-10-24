@@ -1,12 +1,13 @@
 import React from "react";
 import NodeRelation from "./pages/NodeRelation";
-import { DetailModal } from "./containers";
+import { DetailModal, FilterDrawer } from "./containers";
 
 const App: React.FC = () => {
   return (
     <>
       <NodeRelation />
       <DetailModal />
+      <FilterDrawer />
     </>
   );
 };
