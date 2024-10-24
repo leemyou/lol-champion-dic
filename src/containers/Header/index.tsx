@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyledHeader } from "./style";
-import { LanguageRounded, DarkModeRounded } from "@mui/icons-material";
+import { SettingsRounded, DarkModeRounded } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
 import { useCustomTheme } from "@/hooks/useCustomTheme";
+import { FilterDrawer } from "../FilterDrawer";
 
 export const Header: React.FC = () => {
   const { onChangeTheme } = useCustomTheme();
 
-  const onLengChange = () => {};
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsOpen(false);
+  };
 
   const onModeChange = () => {
     onChangeTheme();
   };
 
   return (
-    <StyledHeader style={{ borderBottom: ".5px solid #95959539" }}>
-      <IconButton onClick={onLengChange}>
-        <LanguageRounded />
-      </IconButton>
+    <>
+      <StyledHeader style={{ borderBottom: ".5px solid #95959539" }}>
+        <IconButton onClick={onModeChange}>
+          <DarkModeRounded />
+        </IconButton>
 
-      <IconButton onClick={onModeChange}>
-        <DarkModeRounded />
-      </IconButton>
-    </StyledHeader>
+        <IconButton onClick={handleDrawerOpen}>
+          <SettingsRounded />
+        </IconButton>
+      </StyledHeader>
+
+      <FilterDrawer drawerOpen={isOpen} onDrawerClose={handleDrawerClose} />
+    </>
   );
 };

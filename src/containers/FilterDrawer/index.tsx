@@ -10,13 +10,21 @@ import {
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 
-export const FilterDrawer: React.FC = () => {
+type FilterDrawerProps = {
+  drawerOpen: boolean;
+  onDrawerClose: () => void;
+};
+
+export const FilterDrawer: React.FC<FilterDrawerProps> = ({
+  drawerOpen = false,
+  onDrawerClose,
+}: FilterDrawerProps) => {
   const handleClose = () => {
-    console.log("close");
+    onDrawerClose && onDrawerClose();
   };
 
   return (
-    <StyledDrawer open={true} anchor="right" onClose={handleClose}>
+    <StyledDrawer open={drawerOpen} anchor="right" onClose={onDrawerClose}>
       <Box
         className="drawer-wrapper"
         sx={{
