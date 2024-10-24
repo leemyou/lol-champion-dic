@@ -1,3 +1,5 @@
+import { LanguageCodeEnums } from "@/enums/language";
+
 export interface IChampionImage {
   full: string;
   sprite: string;
@@ -50,6 +52,12 @@ export interface IChampion {
   };
 }
 
+export interface ISearchFilter {
+  language: LanguageCodeEnums;
+}
+
+export interface ReqChampList extends ISearchFilter {}
+
 export interface ResChampList {
   type: string;
   format: string;
@@ -57,7 +65,7 @@ export interface ResChampList {
   data: IChampion;
 }
 
-export interface ReqChampDetail {
+export interface ReqChampDetail extends ISearchFilter {
   champId: string;
 }
 

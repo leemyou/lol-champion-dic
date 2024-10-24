@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { StyledDrawer } from "./style";
 import {
   Box,
@@ -6,9 +6,13 @@ import {
   IconButton,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
+import { LanguageCodeEnums, LanguageCodeToLanguage } from "@/enums/language";
+import { useFilter } from "@/hooks/useFilter";
+import { langObjToArr } from "@/utils/filter";
 
 type FilterDrawerProps = {
   drawerOpen: boolean;
@@ -19,12 +23,27 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   drawerOpen = false,
   onDrawerClose,
 }: FilterDrawerProps) => {
-  const handleClose = () => {
+  const { language, onChangeLanguage } = useFilter();
+
+  const [options, setOptions] = useState({ lang: language, filter: {} });
+
+  const languageArr = useMemo(() => langObjToArr(LanguageCodeToLanguage), []);
+
+  // 검색 최적화 : drawer가 닫힌 후에 state를 저장.
+  const handleClose = async () => {
+    onChangeLanguage(options.lang);
     onDrawerClose && onDrawerClose();
   };
 
+  const handleChangeLanguage = (e: SelectChangeEvent<string>) => {
+    setOptions((prev) => ({
+      ...prev,
+      lang: e.target.value as unknown as LanguageCodeEnums,
+    }));
+  };
+
   return (
-    <StyledDrawer open={drawerOpen} anchor="right" onClose={onDrawerClose}>
+    <StyledDrawer open={drawerOpen} anchor="right" onClose={handleClose}>
       <Box
         className="drawer-wrapper"
         sx={{
@@ -48,17 +67,20 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
         <div className="drawer-wrapper-bottom">
           <div className="drawer-wrapper-bottom-lang">
             <p>LANGUAGE</p>
-            <Select fullWidth size="small" variant="outlined" color="secondary">
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+            <Select
+              defaultValue={LanguageCodeEnums.en_US}
+              value={options.lang}
+              fullWidth
+              size="small"
+              variant="outlined"
+              color="secondary"
+              onChange={handleChangeLanguage}
+            >
+              {languageArr.map(({ key, value }) => (
+                <MenuItem key={key} value={key}>
+                  {value}
+                </MenuItem>
+              ))}
             </Select>
           </div>
           <Divider />

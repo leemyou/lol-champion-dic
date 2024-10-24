@@ -14,6 +14,7 @@ import { useModal } from "@/hooks/useModal";
 import { useChampionDetail } from "@/apis";
 import { IChampionDetail } from "@/apis/lol/lol.model";
 import { useCustomTheme } from "@/hooks/useCustomTheme";
+import { useFilter } from "@/hooks/useFilter";
 
 type championData = {
   bgImgMb: string;
@@ -29,8 +30,12 @@ type DetailModalProps = {};
 export const DetailModal: React.FC<DetailModalProps> = ({}) => {
   const { closeModal, open, championId } = useModal();
   const { isThemeLight } = useCustomTheme();
+  const { language } = useFilter();
 
-  const { data } = useChampionDetail({ champId: championId });
+  const { data } = useChampionDetail({
+    champId: championId,
+    language: language,
+  });
 
   const screen = useTheme();
   const isFullScreenXS = useMediaQuery(screen.breakpoints.down("sm")); // full screen의 breakpoints를 걸어주기 위한 코드
