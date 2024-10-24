@@ -95,60 +95,58 @@ export interface IChampionSpell {
 }
 
 export interface IChampionDetail {
-  [key: string]: {
-    id: string;
-    key: string;
-    name: string;
-    title: string;
-    image: IChampionImage;
-    skins: ISkin[];
-    lore: string;
-    blurb: string;
-    allytips: string[];
-    enemytips: string[];
-    tags: string[];
-    partype: string;
-    info: {
-      attack: number;
-      defense: number;
-      magic: number;
-      difficulty: number;
-    };
-    stats: {
-      hp: number;
-      hpperlevel: number;
-      mp: number;
-      mpperlevel: number;
-      movespeed: number;
-      armor: number;
-      armorperlevel: number;
-      spellblock: number;
-      spellblockperlevel: number;
-      attackrange: number;
-      hpregen: number;
-      hpregenperlevel: number;
-      mpregen: number;
-      mpregenperlevel: number;
-      crit: number;
-      critperlevel: number;
-      attackdamage: number;
-      attackdamageperlevel: number;
-      attackspeedperlevel: number;
-      attackspeed: number;
-    };
-    spells: IChampionSpell[];
-    passive: {
-      name: string;
-      description: string;
-      image: IChampionImage;
-    };
-    recommended: Array<any>;
+  id: string;
+  key: string;
+  name: string;
+  title: string;
+  image: IChampionImage;
+  skins: ISkin[];
+  lore: string;
+  blurb: string;
+  allytips: string[];
+  enemytips: string[];
+  tags: string[];
+  partype: string;
+  info: {
+    attack: number;
+    defense: number;
+    magic: number;
+    difficulty: number;
   };
+  stats: {
+    hp: number;
+    hpperlevel: number;
+    mp: number;
+    mpperlevel: number;
+    movespeed: number;
+    armor: number;
+    armorperlevel: number;
+    spellblock: number;
+    spellblockperlevel: number;
+    attackrange: number;
+    hpregen: number;
+    hpregenperlevel: number;
+    mpregen: number;
+    mpregenperlevel: number;
+    crit: number;
+    critperlevel: number;
+    attackdamage: number;
+    attackdamageperlevel: number;
+    attackspeedperlevel: number;
+    attackspeed: number;
+  };
+  spells: IChampionSpell[];
+  passive: {
+    name: string;
+    description: string;
+    image: IChampionImage;
+  };
+  recommended: Array<any>;
 }
 
 export interface ResChampDetail {
   type: string;
   format: string;
   version: string;
-  data: IChampionDetail;
+  data: { [key: string]: IChampionDetail };
 }

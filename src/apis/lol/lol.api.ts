@@ -17,9 +17,9 @@ const getChampionList = async () => {
 };
 
 // TODO: 추후 파라미터(버전, 국가) 추가 필요
-const getChampionDetail = async (champId: ReqChampDetail) => {
+const getChampionDetail = async (param: ReqChampDetail) => {
   return await Axios.get(
-    `/14.21.1/data/en_US/champion/${champId}.json`,
+    `/14.20.1/data/ko_KR/champion/${param.champId}.json`,
     {}
   ).then((res: { data: ResChampDetail }) => res.data);
 };
