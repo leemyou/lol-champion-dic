@@ -12,12 +12,14 @@ export const useChampionList = (): UseQueryResult<ResChampList, {}> => {
 };
 
 export const useChampionDetail = (
-  param: ReqChampDetail
+  param: ReqChampDetail,
+  enabled?: boolean | undefined
 ): UseQueryResult<ResChampDetail, {}> => {
   return useQuery({
     queryKey: ["championDetail"],
     queryFn: async () => {
       return (await getChampionDetail(param)) as ResChampDetail;
     },
+    enabled: enabled || !!param.champId,
   });
 };
