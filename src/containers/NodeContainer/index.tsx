@@ -5,6 +5,8 @@ import ForceGraph3D, { NodeObject } from "react-force-graph-3d";
 import * as THREE from "three";
 import { useModal } from "@/hooks/useModal";
 import { useFilter } from "@/hooks/useFilter";
+import baseRegionData from "@assets/data/baseRegionData.json";
+import championRegionData from "@assets/data/championRegion.json";
 
 export const NodeContainer: React.FC = () => {
   const { openModal } = useModal();
@@ -13,23 +15,15 @@ export const NodeContainer: React.FC = () => {
 
   const { data: champList } = useChampionList({ language: language });
 
-  // champList가 없는 경우, 빈 배열을 반환
-  const championList = useMemo(() => {
-    return champList ? champListToChampNode(champList) : [];
-  }, [champList]);
-
   // 그래프 데이터
   const gData = useMemo(() => {
-    return !championList.length
-      ? { nodes: [], links: [] } // championList가 null일 경우, 빈 값 반환
-      : {
-          nodes: championList,
-          links: championList.map((id) => ({
-            source: id,
-            target: championList[Math.round(Math.random())].id,
-          })),
-        };
-  }, [championList]);
+    return champList
+      ? {
+          nodes: [...baseRegionData.nodes, ...champListToChampNode(champList)],
+          links: [...baseRegionData.links, ...championRegionData.links],
+        }
+      : baseRegionData;
+  }, [champList]);
 
   // 노드 렌더링 함수
   const handleNodeThreeObject = ({ img }: { img: string }) => {
@@ -45,7 +39,7 @@ export const NodeContainer: React.FC = () => {
   const handleClickNode = (node: NodeObject) => {
     return !node.id
       ? alert(
-          "챔피언 상세 정보를 불러오는데에 실패했습니다! 나중에 다시 시도해주세요."
+          "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요."
         )
       : openModal(node.id as string);
   };

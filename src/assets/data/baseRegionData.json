@@ -1,0 +1,106 @@
+{
+  "nodes": [
+    {
+      "id": "Demacia",
+      "img": "src/assets/images/region/demacia.webp"
+    },
+    {
+      "id": "Noxus",
+      "img": "src/assets/images/region/noxus.webp"
+    },
+    {
+      "id": "Bilgewater",
+      "img": "src/assets/images/region/bilgewater.webp"
+    },
+    {
+      "id": "Freljord",
+      "img": "src/assets/images/region/freljoird.webp"
+    },
+    {
+      "id": "ShadowIsles",
+      "img": "src/assets/images/region/shadowIsles.webp"
+    },
+    {
+      "id": "Shurima",
+      "img": "src/assets/images/region/shurima.webp"
+    },
+    {
+      "id": "Ixtal",
+      "img": "src/assets/images/region/ixtal.webp"
+    },
+    {
+      "id": "Ionia",
+      "img": "src/assets/images/region/ionia.webp"
+    },
+    {
+      "id": "BandleCity",
+      "img": "src/assets/images/region/bandleCity.webp"
+    },
+    {
+      "id": "Targon",
+      "img": "src/assets/images/region/targon.webp"
+    },
+    {
+      "id": "Zaun",
+      "img": "src/assets/images/region/zaun.webp"
+    },
+    {
+      "id": "Void",
+      "img": "src/assets/images/region/void.webp"
+    },
+    {
+      "id": "Piltover",
+      "img": "src/assets/images/region/piltover.webp"
+    },
+    {
+      "id": "Runeterra",
+      "img": "src/assets/images/region/runeterra.webp"
+    }
+  ],
+  "links": [
+    {
+      "source": "Runeterra",
+      "target": "Demacia"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Noxus"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Bilgewater"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Freljord"
+    },
+    {
+      "source": "Runeterra",
+      "target": "ShadowIsles"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Ixtal"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Ionia"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Targon"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Zaun"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Piltover"
+    },
+    {
+      "source": "Runeterra",
+      "target": "Shurima"
+    }
+  ]
+}
