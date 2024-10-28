@@ -15,10 +15,10 @@ const Axios = axios.create({
 });
 
 // TODO: 추후 파라미터(버전, 국가) 추가 필요
-const getChampionList = async ({ language }: ReqChampList) => {
-  return await Axios.get(`/14.20.1/data/${language}/champion.json`, {}).then(
-    (res: { data: ResChampList }) => res.data
-  );
+const getChampionList = async (params: ReqChampList) => {
+  return await Axios.get<ResChampList>(
+    `/14.20.1/data/${params.language}/champion.json`
+  ).then((res) => res.data);
 };
 
 // TODO: 추후 파라미터(버전, 국가) 추가 필요

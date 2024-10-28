@@ -11,7 +11,7 @@ export const useChampionList = (
   param: ReqChampList
 ): UseQueryResult<ResChampList, {}> => {
   return useQuery({
-    queryKey: ["championList"],
+    queryKey: ["championList", param],
     queryFn: async () => {
       return (await getChampionList(param)) as ResChampList;
     },
@@ -23,7 +23,7 @@ export const useChampionDetail = (
   enabled?: boolean | undefined
 ): UseQueryResult<ResChampDetail, {}> => {
   return useQuery({
-    queryKey: ["championDetail"],
+    queryKey: ["championDetail", param],
     queryFn: async () => {
       return (await getChampionDetail(param)) as ResChampDetail;
     },
