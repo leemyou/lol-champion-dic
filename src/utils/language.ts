@@ -76,4 +76,10 @@ const getUserLanguage = (): LanguageCodeEnums => {
   );
 };
 
-export { getUserLanguage };
+const checkLanguageEng = (text: string) => {
+  var patternEng = /[a-zA-Z]/;
+
+  return patternEng.test(text);
+};
+
+export { getUserLanguage, checkLanguageEng };
