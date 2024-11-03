@@ -9,8 +9,13 @@ export const useSearch = () => {
     setSearchParams(text);
   }, []);
 
+  const onResetSearch = useCallback(() => {
+    setSearchParams("");
+  }, []);
+
   return {
     searchParams,
     onSearch,
+    onResetSearch,
   };
 };

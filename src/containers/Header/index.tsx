@@ -13,10 +13,10 @@ import { useSearch } from "@/hooks/useSearch";
 
 export const Header: React.FC = () => {
   const { onChangeTheme } = useCustomTheme();
-  const { onSearch } = useSearch();
+  const { onSearch, searchParams } = useSearch();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(searchParams);
 
   const handleDrawerOpen = () => {
     setIsOpen(true);
@@ -56,6 +56,7 @@ export const Header: React.FC = () => {
             variant="standard"
             color="secondary"
             placeholder="검색어를 입력해주세요"
+            value={searchText}
             onKeyDown={handleEnter}
             onChange={handleChangeSearch}
           />

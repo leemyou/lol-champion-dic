@@ -13,6 +13,7 @@ import { CloseRounded } from "@mui/icons-material";
 import { LanguageCodeEnums, LanguageCodeToLanguage } from "@/enums/language";
 import { useFilter } from "@/hooks/useFilter";
 import { langObjToArr } from "@/utils/filter";
+import { useSearch } from "@/hooks/useSearch";
 
 type FilterDrawerProps = {
   drawerOpen: boolean;
@@ -23,6 +24,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   drawerOpen = false,
   onDrawerClose,
 }: FilterDrawerProps) => {
+  const { onResetSearch } = useSearch();
   const { language, onChangeLanguage } = useFilter();
 
   const [options, setOptions] = useState({ lang: language, filter: {} });
@@ -32,6 +34,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   // 검색 최적화 : drawer가 닫힌 후에 state를 저장.
   const handleClose = async () => {
     onChangeLanguage(options.lang);
+    onResetSearch && onResetSearch();
     onDrawerClose && onDrawerClose();
   };
 
