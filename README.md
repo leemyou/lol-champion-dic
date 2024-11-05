@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+<a href="" target="_blank">
+<img src="https://github.com/leemyou/lol-champion-dic/tree/main/src/assets/images/preview/banner.png" alt="배너" width="100%"/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</a>
 
-## Available Scripts
+<br/>
+<br/>
 
-In the project directory, you can run:
+# 0. Getting Started
 
-### `npm start`
+```bash
+$ npm install
+$ npm dev start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[서비스 링크](https://leemyou.github.io/lol-champion-dic/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br/>
+<br/>
 
-### `npm test`
+# 1. Project Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 프로젝트 이름: 리그오브레전드 챔피언 관계도
+- 프로젝트 설명: react-force-graph 라이브러리를 사용한 리그오브레전드 챔피언 관계도 및 챔피언 보기 프로젝트 입니다.
 
-### `npm run build`
+<br/>
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 2. Key Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 챔피언 관계도 보기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- react-force-graph 라이브러리를 이용한 챔피언 관계도
 
-### `npm run eject`
+2. 챔피언 검색
+3. 챔피언 상세보기
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 모달 활용
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. 다크모드 지원
+5. 한글 뿐만 아니라 영어 및 다양한 국가 지원
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **챔피언 관계도**:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - react-force-graph를 이용하여 각 지역과 그 지역에 소속된 챔피언들을 볼 수 있습니다.
 
-## Learn More
+- **챔피언 검색**:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - 챔피언을 검색해서 해당 챔피언으로 카메라 포커스가 이동하도록 할 수 있습니다.
+  - 언어 필터에서 선택한 언어의 챔피언을 검색할 수 있습니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **챔피언 상세보기 모달**:
 
-### Code Splitting
+  - 챔피언 노드를 클릭하면 해당 챔피언의 상세정보를 볼 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **다크 모드 지원**:
 
-### Analyzing the Bundle Size
+  - 사용자의 브라우저 환경에 맞는 화면 모드를 지원합니다.
+  - 화면 상단에 있는 버튼을 통해서 화면 모드를 변경할 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **다양한 국가 언어 지원**:
 
-### Making a Progressive Web App
+  - 언어 선택 필터를 이용해서 다양한 국가의 언어를 이용할 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br/>
+<br/>
 
-### Advanced Configuration
+# 3. Technology Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 3.1 Language
 
-### Deployment
+- HTML5
+- CSS3
+- JavaScript
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br/>
 
-### `npm run build` fails to minify
+## 3.2 Frotend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- NPM(10.8.3)
+- VITE(5.3.5)
+- AXIOS(1.7.7)
+- REACT
+
+<br/>
+
+## 3.3 Design
+
+- figma
+
+<br/>
+
+## 3.4 Cooperation
+
+- Git
+
+## 3.5 Library
+
+- react-query
+- styled-components
+- react-force-graph
+- mui
+
+<br/>
+
+<br/>
+<br/>
+
+# 4. PreView
+
+- 홈 화면(다크 모드)
+  <img src="https://github.com/leemyou/lol-champion-dic/tree/main/src/assets/images/preview/main.png" alt="다크모드 홈화면" width="100%"/>
+- 홈 화면(라이트 모드)
+  <img src="https://github.com/leemyou/lol-champion-dic/tree/main/src/assets/images/preview/light.png" alt="라이트모드 홈화면" width="100%"/>
+- 필터
+  <img src="https://github.com/leemyou/lol-champion-dic/tree/main/src/assets/images/preview/filter.png" alt="필터 화면" width="100%"/>
+- 상세보기 모달
+  <img src="https://github.com/leemyou/lol-champion-dic/tree/main/src/assets/images/preview/detail.png" alt="상세보기 모달 화면" width="100%"/>
