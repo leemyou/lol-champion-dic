@@ -1,5 +1,10 @@
 import React, { useMemo } from "react";
 import { ChampDetail } from "./style";
+
+import { useChampionDetail } from "@/apis";
+import { IChampionDetail } from "@/apis/lol/lol.model";
+import { useModal, useFilter, useCustomTheme } from "@/hooks";
+
 import { Cancel } from "@mui/icons-material";
 import {
   Box,
@@ -11,11 +16,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useModal } from "@/hooks/useModal";
-import { useChampionDetail } from "@/apis";
-import { IChampionDetail } from "@/apis/lol/lol.model";
-import { useCustomTheme } from "@/hooks/useCustomTheme";
-import { useFilter } from "@/hooks/useFilter";
 
 type championData = {
   bgImgMb: string;

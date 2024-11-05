@@ -1,22 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import baseRegionData from "@assets/data/baseRegionData.json";
+import championRegionData from "@assets/data/championRegion.json";
+import { CAMERA_DISTANCE } from "@/constants";
+import { champListToChampNode, checkLanguageEng } from "@/utils";
+import { AlertEnum } from "@/enums";
+import { useAlert, useFilter, useModal, useSearch } from "@/hooks";
+import { type ResChampList } from "@/apis/lol/lol.model";
 import { useChampionList } from "@/apis";
-import { champListToChampNode } from "@/utils/champion";
 import ForceGraph3D, {
   GraphData,
   LinkObject,
   NodeObject,
 } from "react-force-graph-3d";
 import * as THREE from "three";
-import { useModal } from "@/hooks/useModal";
-import { useFilter } from "@/hooks/useFilter";
-import baseRegionData from "@assets/data/baseRegionData.json";
-import championRegionData from "@assets/data/championRegion.json";
-import { useSearch } from "@/hooks/useSearch";
-import { checkLanguageEng } from "@/utils/language";
-import { CAMERA_DISTANCE } from "@/constants";
-import { ResChampList } from "@/apis/lol/lol.model";
-import { useAlert } from "@/hooks/useAlert";
-import { AlertEnum } from "@/enums/alertType";
 
 export const NodeContainer: React.FC = () => {
   const fgRef = useRef<any>();

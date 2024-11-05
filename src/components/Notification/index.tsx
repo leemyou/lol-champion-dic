@@ -1,6 +1,8 @@
-import { useAlert } from "@/hooks/useAlert";
-import { Alert, Snackbar } from "@mui/material";
 import React from "react";
+
+import { useAlert } from "@/hooks";
+
+import { Alert, Snackbar } from "@mui/material";
 
 export const Notification: React.FC = () => {
   const { alertOption, onAlertClose } = useAlert();
