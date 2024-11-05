@@ -179,6 +179,7 @@ export const NodeContainer: React.FC = () => {
       onNodeClick={handleClickNode}
       linkOpacity={1}
       numDimensions={3}
+      linkAutoColorBy={"#888888"}
     />
   );
 };
