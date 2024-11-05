@@ -15,11 +15,14 @@ import { useSearch } from "@/hooks/useSearch";
 import { checkLanguageEng } from "@/utils/language";
 import { CAMERA_DISTANCE } from "@/constants";
 import { ResChampList } from "@/apis/lol/lol.model";
+import { useAlert } from "@/hooks/useAlert";
+import { AlertEnum } from "@/enums/alertType";
 
 export const NodeContainer: React.FC = () => {
   const fgRef = useRef<any>();
 
   const { openModal } = useModal();
+  const { onAlertOpen } = useAlert();
   const { language } = useFilter();
   const { searchParams } = useSearch();
   const { data: champList, isLoading } = useChampionList({
@@ -113,7 +116,10 @@ export const NodeContainer: React.FC = () => {
     });
 
     if (!node) {
-      alert("일치하는 검색어가 없습니다!");
+      onAlertOpen({
+        message: "일치하는 검색어가 없습니다!",
+        alertType: AlertEnum.ERROR,
+      });
       return;
     }
 
@@ -137,9 +143,11 @@ export const NodeContainer: React.FC = () => {
       if (node?.id) {
         openModal(node.id as string);
       } else {
-        alert(
-          "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요."
-        );
+        onAlertOpen({
+          message:
+            "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요.",
+          alertType: AlertEnum.ERROR,
+        });
       }
     },
     [openModal]
