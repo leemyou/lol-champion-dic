@@ -1,10 +1,9 @@
 import { LanguageCodeEnums } from "@/enums/language";
 
 const getUserLanguage = (): LanguageCodeEnums => {
-  let userLang = (navigator.language || navigator.userLanguage).replace(
-    "-",
-    "_"
-  );
+  let userLang = navigator.language
+    //  || navigator.userLnguage
+    .replace("-", "_");
 
   // 언어만 있을 경우 기본 국가 코드 추가
   switch (userLang) {

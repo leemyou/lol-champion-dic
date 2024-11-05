@@ -7,11 +7,7 @@ import { AlertEnum } from "@/enums";
 import { useAlert, useFilter, useModal, useSearch } from "@/hooks";
 import { type ResChampList } from "@/apis/lol/lol.model";
 import { useChampionList } from "@/apis";
-import ForceGraph3D, {
-  GraphData,
-  LinkObject,
-  NodeObject,
-} from "react-force-graph-3d";
+import ForceGraph3D, { NodeObject } from "react-force-graph-3d";
 import * as THREE from "three";
 
 export const NodeContainer: React.FC = () => {
@@ -25,8 +21,7 @@ export const NodeContainer: React.FC = () => {
     language: language,
   });
 
-  const [graphData, setGraphData] =
-    useState<GraphData<NodeObject, LinkObject>>(baseRegionData);
+  const [graphData, setGraphData] = useState(baseRegionData);
 
   const processGraphData = useCallback(
     (championList: ResChampList | undefined) => {
@@ -109,7 +104,7 @@ export const NodeContainer: React.FC = () => {
         : searchParams;
 
       return dataValue === searchValue;
-    });
+    }) as NodeObject;
 
     if (!node) {
       onAlertOpen({
