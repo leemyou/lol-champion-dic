@@ -6,6 +6,7 @@ import {
   Chip,
   DialogContent,
   IconButton,
+  Skeleton,
   Typography,
   useMediaQuery,
   useTheme,
@@ -32,7 +33,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({}) => {
   const { isThemeLight } = useCustomTheme();
   const { language } = useFilter();
 
-  const { data } = useChampionDetail({
+  const { data, isLoading } = useChampionDetail({
     champId: championId,
     language: language,
   });
@@ -93,37 +94,59 @@ export const DetailModal: React.FC<DetailModalProps> = ({}) => {
             onClick={handleClose}
             children={<Cancel />}
           />
-          <Typography
-            className="dialog-content-box-subtitle"
-            variant="h5"
-            fontWeight={"regular"}
-            textAlign={"left"}
-          >
-            {champData?.champTitle}
-          </Typography>
 
-          <Typography variant="h2" fontWeight={"bold"} textAlign={"left"}>
-            {champData.champName}
-          </Typography>
-          {champData.champTags.length > 0 && (
-            <div className="dialog-content-box-tags">
-              {champData.champTags?.map((tag: string) => (
-                <Chip
-                  label={`#${tag}`}
-                  size="small"
-                  itemType="detail"
-                  key={`${championId}_${tag}`}
-                />
-              ))}
-            </div>
+          {isLoading ? (
+            <>
+              <Skeleton variant="rounded" width={"60%"} height={20} />
+              <Skeleton
+                variant="rounded"
+                width={"50%"}
+                height={50}
+                sx={{ mt: 2, mb: 2 }}
+              />
+              <Skeleton variant="text" width={"30%"} height={40} />
+              <Skeleton
+                variant="rounded"
+                sx={{ width: { xs: "100%", sm: "65%" }, mt: 2 }}
+                height={200}
+              />
+            </>
+          ) : (
+            <>
+              <Typography
+                className="dialog-content-box-subtitle"
+                variant="h5"
+                fontWeight={"regular"}
+                textAlign={"left"}
+              >
+                {champData?.champTitle}
+              </Typography>
+              <Typography variant="h2" fontWeight={"bold"} textAlign={"left"}>
+                {champData.champName}
+              </Typography>
+
+              {champData.champTags.length > 0 && (
+                <div className="dialog-content-box-tags">
+                  {champData.champTags?.map((tag: string) => (
+                    <Chip
+                      label={`#${tag}`}
+                      size="small"
+                      itemType="detail"
+                      key={`${championId}_${tag}`}
+                    />
+                  ))}
+                </div>
+              )}
+
+              <Typography
+                variant="body1"
+                textAlign={"left"}
+                sx={{ width: { xs: "100%", sm: "65%" }, mt: 2 }}
+              >
+                {champData.champLore}
+              </Typography>
+            </>
           )}
-          <Typography
-            variant="body1"
-            textAlign={"left"}
-            sx={{ width: { xs: "100%", sm: "65%" }, mt: 2 }}
-          >
-            {champData.champLore}
-          </Typography>
         </Box>
       </DialogContent>
     </ChampDetail>
