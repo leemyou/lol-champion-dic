@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { StyledHeader } from "./style";
+
+import { useCustomTheme, useSearch } from "@/hooks";
+import { FilterDrawer } from "../FilterDrawer";
+
 import {
   SettingsRounded,
   DarkModeRounded,
   SearchRounded,
 } from "@mui/icons-material";
 import { IconButton, TextField } from "@mui/material";
-
-import { useCustomTheme } from "@/hooks/useCustomTheme";
-import { FilterDrawer } from "../FilterDrawer";
-import { useSearch } from "@/hooks/useSearch";
 
 export const Header: React.FC = () => {
   const { onChangeTheme } = useCustomTheme();

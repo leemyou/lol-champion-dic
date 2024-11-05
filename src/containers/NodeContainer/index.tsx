@@ -1,25 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import baseRegionData from "@assets/data/baseRegionData.json";
+import championRegionData from "@assets/data/championRegion.json";
+import { CAMERA_DISTANCE } from "@/constants";
+import { champListToChampNode, checkLanguageEng } from "@/utils";
+import { AlertEnum } from "@/enums";
+import { useAlert, useFilter, useModal, useSearch } from "@/hooks";
+import { type ResChampList } from "@/apis/lol/lol.model";
 import { useChampionList } from "@/apis";
-import { champListToChampNode } from "@/utils/champion";
 import ForceGraph3D, {
   GraphData,
   LinkObject,
   NodeObject,
 } from "react-force-graph-3d";
 import * as THREE from "three";
-import { useModal } from "@/hooks/useModal";
-import { useFilter } from "@/hooks/useFilter";
-import baseRegionData from "@assets/data/baseRegionData.json";
-import championRegionData from "@assets/data/championRegion.json";
-import { useSearch } from "@/hooks/useSearch";
-import { checkLanguageEng } from "@/utils/language";
-import { CAMERA_DISTANCE } from "@/constants";
-import { ResChampList } from "@/apis/lol/lol.model";
 
 export const NodeContainer: React.FC = () => {
   const fgRef = useRef<any>();
 
   const { openModal } = useModal();
+  const { onAlertOpen } = useAlert();
   const { language } = useFilter();
   const { searchParams } = useSearch();
   const { data: champList, isLoading } = useChampionList({
@@ -113,7 +112,10 @@ export const NodeContainer: React.FC = () => {
     });
 
     if (!node) {
-      alert("일치하는 검색어가 없습니다!");
+      onAlertOpen({
+        message: "일치하는 검색어가 없습니다!",
+        alertType: AlertEnum.ERROR,
+      });
       return;
     }
 
@@ -137,9 +139,11 @@ export const NodeContainer: React.FC = () => {
       if (node?.id) {
         openModal(node.id as string);
       } else {
-        alert(
-          "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요."
-        );
+        onAlertOpen({
+          message:
+            "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요.",
+          alertType: AlertEnum.ERROR,
+        });
       }
     },
     [openModal]
