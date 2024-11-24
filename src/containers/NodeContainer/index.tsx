@@ -2,7 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import baseRegionData from "@assets/data/baseRegionData.json";
 import championRegionData from "@assets/data/championRegion.json";
 import { CAMERA_DISTANCE } from "@/constants";
-import { champListToChampNode, checkLanguageEng } from "@/utils";
+import {
+  champListToChampNode,
+  checkLanguageEng,
+  createLowResTexture,
+} from "@/utils";
 import { AlertEnum } from "@/enums";
 import { useAlert, useFilter, useModal, useSearch } from "@/hooks";
 import { type ResChampList } from "@/apis/lol/lol.model";
@@ -81,11 +85,18 @@ export const NodeContainer: React.FC = () => {
 
   // 노드 렌더링 함수
   const handleNodeThreeObject = useCallback(({ img }: { img: string }) => {
-    const imgTexture = new THREE.TextureLoader().load(`${img}`);
-    imgTexture.colorSpace = THREE.SRGBColorSpace;
-    const material = new THREE.SpriteMaterial({ map: imgTexture });
+    const lowResTexture = createLowResTexture(img, 0.25); // 해상도를 25%로 축소
+    const material = new THREE.SpriteMaterial({ map: lowResTexture });
     const sprite = new THREE.Sprite(material);
     sprite.scale.set(12, 12, 12);
+
+    // 고해상도 텍스처 비동기로 로드 후 교체
+    new THREE.TextureLoader().load(img, (highResTexture) => {
+      highResTexture.colorSpace = THREE.SRGBColorSpace;
+      material.map = highResTexture;
+      material.needsUpdate = true;
+    });
+
     return sprite;
   }, []);
 
@@ -162,8 +173,6 @@ export const NodeContainer: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [graphData, isLoading]);
-
-  useEffect(() => {});
 
   return (
     <ForceGraph3D
