@@ -1,13 +1,20 @@
-import React, { useMemo, useState } from "react";
+import React, { ChangeEvent, useMemo, useState } from "react";
 import { StyledDrawer } from "./style";
 
-import { LanguageCodeEnums, LanguageCodeToLanguage } from "@/enums";
+import {
+  LanguageCodeEnums,
+  LanguageCodeToLanguage,
+  RelationEnums,
+} from "@/enums";
 import { useFilter, useSearch } from "@/hooks";
 import { langObjToArr } from "@/utils";
 
 import {
   Box,
+  Checkbox,
   Divider,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   MenuItem,
   Select,
@@ -15,6 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
+import { regionChecked, relationChecked } from "@/recoils";
 
 type FilterDrawerProps = {
   drawerOpen: boolean;
@@ -26,15 +34,24 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   onDrawerClose,
 }: FilterDrawerProps) => {
   const { onResetSearch } = useSearch();
-  const { language, onChangeLanguage } = useFilter();
+  const { language, onChangeLanguage, onChangeRelation, onChangeRegion } =
+    useFilter();
 
-  const [options, setOptions] = useState({ lang: language, filter: {} });
+  const [options, setOptions] = useState({ lang: language });
+
+  const [relationSelected, setRelationSelected] =
+    useState<RelationEnums[]>(relationChecked);
+  const [selectedRegion, setSelectedRegion] = useState(regionChecked);
 
   const languageArr = useMemo(() => langObjToArr(LanguageCodeToLanguage), []);
 
-  // 검색 최적화 : drawer가 닫힌 후에 state를 저장.
+  console.log(relationSelected);
+
+  // drawer가 닫힌 후에 state를 저장.
   const handleClose = async () => {
     onChangeLanguage(options.lang);
+    onChangeRelation(relationSelected);
+    onChangeRegion(selectedRegion);
     onResetSearch && onResetSearch();
     onDrawerClose && onDrawerClose();
   };
@@ -44,6 +61,40 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
       ...prev,
       lang: e.target.value as unknown as LanguageCodeEnums,
     }));
+  };
+
+  const handleRelationAll = () => {
+    if (relationChecked.length === relationSelected.length) {
+      setRelationSelected([]); // 전체 선택 해제
+    } else {
+      setRelationSelected(relationChecked); // 전체 선택
+    }
+  };
+
+  const handleRelation = (item: RelationEnums) => {
+    setRelationSelected(
+      (prevSelected) =>
+        prevSelected.includes(item)
+          ? prevSelected.filter((i) => i !== item) // 선택 해제
+          : [...prevSelected, item] // 선택
+    );
+  };
+
+  const handleRegionAll = () => {
+    if (regionChecked.length === selectedRegion.length) {
+      setSelectedRegion([]); // 전체 선택 해제
+    } else {
+      setSelectedRegion(regionChecked); // 전체 선택
+    }
+  };
+
+  const handleRegion = (item: string) => {
+    setSelectedRegion(
+      (prevSelected) =>
+        prevSelected.includes(item)
+          ? prevSelected.filter((i) => i !== item) // 선택 해제
+          : [...prevSelected, item] // 선택
+    );
   };
 
   return (
@@ -67,6 +118,73 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
         </div>
         <div className="drawer-wrapper-middle">
           <p>FILTER</p>
+          <div className="drawer-wrapper-middle-selects">
+            <div className="drawer-wrapper-middle-selects-box">
+              <p>Relations</p>
+              <FormControlLabel
+                label="ALL"
+                control={
+                  <Checkbox
+                    checked={relationChecked.length === relationSelected.length}
+                    indeterminate={
+                      relationSelected.length !== 0 &&
+                      relationChecked.length !== relationSelected.length
+                    }
+                    onChange={handleRelationAll}
+                    color="default"
+                  />
+                }
+              />
+              {relationChecked.map((item) => (
+                <FormControlLabel
+                  key={item}
+                  label={item}
+                  id={item}
+                  control={
+                    <Checkbox
+                      checked={relationSelected.includes(item)}
+                      value={item}
+                      onChange={() => handleRelation(item)}
+                      color="default"
+                    />
+                  }
+                />
+              ))}
+            </div>
+            <div className="drawer-wrapper-middle-selects-box">
+              <p>Regions</p>
+              <FormControlLabel
+                label="ALL"
+                control={
+                  <Checkbox
+                    checked={regionChecked.length === selectedRegion.length}
+                    indeterminate={
+                      selectedRegion.length !== 0 &&
+                      regionChecked.length !== selectedRegion.length
+                    }
+                    onChange={handleRegionAll}
+                    color="default"
+                  />
+                }
+              />
+
+              {regionChecked.map((item) => (
+                <FormControlLabel
+                  key={item}
+                  label={item}
+                  id={item}
+                  control={
+                    <Checkbox
+                      checked={selectedRegion.includes(item)}
+                      value={item}
+                      onChange={() => handleRegion(item)}
+                      color="default"
+                    />
+                  }
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <div className="drawer-wrapper-bottom">
           <div className="drawer-wrapper-bottom-lang">
