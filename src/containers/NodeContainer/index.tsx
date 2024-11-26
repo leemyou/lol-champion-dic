@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import baseRegionData from "@assets/data/baseRegionData.json";
 import championRegionData from "@assets/data/championRegion.json";
+import championRelationData from "@assets/data/championRelation.json";
 import { CAMERA_DISTANCE } from "@/constants";
 import {
   champListToChampNode,
@@ -41,7 +42,11 @@ export const NodeContainer: React.FC = () => {
         const nodeIdMap = new Set(nodes.map((node) => node.id));
 
         // 링크 데이터 처리
-        const allLinks = [...baseRegionData.links, ...championRegionData.links];
+        const allLinks = [
+          ...baseRegionData.links,
+          ...championRegionData.links,
+          ...championRelationData.links,
+        ];
         const validLinks = allLinks
           .map((link) => ({
             // link배열을 새로 만드는 작업

@@ -1,0 +1,33 @@
+{
+  "links": [
+    { "source": "Viego", "target": "Kalista", "relation": "Family" },
+    { "source": "Viego", "target": "Vladimir", "relation": "Family" },
+    { "source": "Kalista", "target": "Vladimir", "relation": "Family" },
+    { "source": "Garen", "target": "Lux", "relation": "Family" },
+    { "source": "Nasus", "target": "Renekton", "relation": "Family" },
+    { "source": "Darius", "target": "Draven", "relation": "Family" },
+    { "source": "Lissandra", "target": "Serilda", "relation": "Family" },
+    { "source": "Serilda", "target": "Sejuani", "relation": "Family" },
+    { "source": "Ornn", "target": "Volibear", "relation": "Family" },
+    { "source": "Ornn", "target": "Anivia", "relation": "Family" },
+    { "source": "Morgana", "target": "Kayle", "relation": "Family" },
+    { "source": "Katarina", "target": "Cassiopeia", "relation": "Family" },
+    { "source": "Yasuo", "target": "Yone", "relation": "Family" },
+    { "source": "Kassadin", "target": "Kai'Sa", "relation": "Family" },
+    { "source": "Lucian", "target": "Senna", "relation": "Married" },
+    { "source": "Tristana", "target": "Ashe", "relation": "Married" },
+    { "source": "Vi", "target": "Jinx", "relation": "Family" },
+    { "source": "Azir", "target": "Sivir", "relation": "Family" },
+
+    {
+      "source": "Viktor",
+      "target": "Blitzcrank",
+      "relation": "Creator_Creation"
+    },
+
+    { "source": "Xayah", "target": "Rakan", "relation": "Lovers" },
+    { "source": "Garen", "target": "Katarina", "relation": "Lovers" },
+    { "source": "Illaoi", "target": "Gangplank", "relation": "Ex-lovers" },
+    { "source": "Evelynn", "target": "Twisted Fate", "relation": "Ex-lovers" }
+  ]
+}
