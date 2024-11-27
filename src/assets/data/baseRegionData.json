@@ -1,106 +1,75 @@
 {
   "nodes": [
-    {
-      "id": "Demacia",
-      "img": "src/assets/images/region/demacia.webp"
-    },
-    {
-      "id": "Noxus",
-      "img": "src/assets/images/region/noxus.webp"
-    },
-    {
-      "id": "Bilgewater",
-      "img": "src/assets/images/region/bilgewater.webp"
-    },
-    {
-      "id": "Freljord",
-      "img": "src/assets/images/region/freljoird.webp"
-    },
-    {
-      "id": "ShadowIsles",
-      "img": "src/assets/images/region/shadowIsles.webp"
-    },
-    {
-      "id": "Shurima",
-      "img": "src/assets/images/region/shurima.webp"
-    },
-    {
-      "id": "Ixtal",
-      "img": "src/assets/images/region/ixtal.webp"
-    },
-    {
-      "id": "Ionia",
-      "img": "src/assets/images/region/ionia.webp"
-    },
-    {
-      "id": "BandleCity",
-      "img": "src/assets/images/region/bandleCity.webp"
-    },
-    {
-      "id": "Targon",
-      "img": "src/assets/images/region/targon.webp"
-    },
-    {
-      "id": "Zaun",
-      "img": "src/assets/images/region/zaun.webp"
-    },
-    {
-      "id": "Void",
-      "img": "src/assets/images/region/void.webp"
-    },
-    {
-      "id": "Piltover",
-      "img": "src/assets/images/region/piltover.webp"
-    },
-    {
-      "id": "Runeterra",
-      "img": "src/assets/images/region/runeterra.webp"
-    }
+    { "id": "Demacia", "img": "" },
+    { "id": "Noxus", "img": "" },
+    { "id": "Bilgewater", "img": "" },
+    { "id": "Freljord", "img": "" },
+    { "id": "ShadowIsles", "img": "" },
+    { "id": "Shurima", "img": "" },
+    { "id": "Ixtal", "img": "" },
+    { "id": "Ionia", "img": "" },
+    { "id": "BandleCity", "img": "" },
+    { "id": "Targon", "img": "" },
+    { "id": "Zaun", "img": "" },
+    { "id": "Void", "img": "" },
+    { "id": "Piltover", "img": "" },
+    { "id": "Runeterra", "img": "" }
   ],
   "links": [
     {
       "source": "Runeterra",
-      "target": "Demacia"
+      "target": "Demacia",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Noxus"
+      "target": "Noxus",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Bilgewater"
+      "target": "Bilgewater",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Freljord"
+      "target": "Freljord",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "ShadowIsles"
+      "target": "ShadowIsles",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Ixtal"
+      "target": "Ixtal",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Ionia"
+      "target": "Ionia",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Targon"
+      "target": "Targon",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Zaun"
+      "target": "Zaun",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Piltover"
+      "target": "Piltover",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Shurima"
+      "target": "Shurima",
+      "relation": "Region"
     }
   ]
 }

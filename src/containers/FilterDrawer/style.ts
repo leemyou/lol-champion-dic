@@ -26,6 +26,29 @@ export const StyledDrawer = styled(Drawer)<DrawerProps>`
       > p {
         font-weight: bold;
       }
+
+      &-selects {
+        overflow-y: scroll;
+        max-height: 50vh;
+
+        &-box {
+          margin-top: 8px;
+          display: flex;
+          flex-direction: column;
+
+          > p {
+            opacity: 0.6;
+          }
+
+          > label:nth-child(2) {
+            margin-left: 4px;
+          }
+
+          > label:not(:nth-child(2)) {
+            margin-left: 16px;
+          }
+        }
+      }
     }
 
     &-bottom {

@@ -1,5 +1,5 @@
-import { LanguageCodeEnums } from "@/enums/language";
-import { filterState } from "@/recoils/filter";
+import { RelationEnums, LanguageCodeEnums } from "@/enums";
+import { filterState } from "@/recoils";
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 
@@ -13,8 +13,25 @@ export const useFilter = () => {
     [setFilter]
   );
 
+  const onChangeRelation = useCallback(
+    (relation: RelationEnums[]) => {
+      setFilter((prev) => ({ ...prev, relation: relation }));
+    },
+    [setFilter]
+  );
+
+  const onChangeRegion = useCallback(
+    (region: string[]) => {
+      setFilter((prev) => ({ ...prev, region: region }));
+    },
+    [setFilter]
+  );
+
   return {
+    filterOptions: filter,
     language: filter.language,
     onChangeLanguage,
+    onChangeRelation,
+    onChangeRegion,
   };
 };
