@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { StyledDrawer } from "./style";
 
 import {
@@ -14,7 +14,6 @@ import {
   Checkbox,
   Divider,
   FormControlLabel,
-  FormGroup,
   IconButton,
   MenuItem,
   Select,
@@ -44,8 +43,6 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   const [selectedRegion, setSelectedRegion] = useState(regionChecked);
 
   const languageArr = useMemo(() => langObjToArr(LanguageCodeToLanguage), []);
-
-  console.log(relationSelected);
 
   // drawer가 닫힌 후에 state를 저장.
   const handleClose = async () => {
@@ -210,6 +207,9 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
             <Typography color="secondary">@emyo.155</Typography>
             <Typography color="secondary">
               https://github.com/leemyou
+            </Typography>
+            <Typography color="secondary">
+              contributor: THIRD[롤 백과사전]
             </Typography>
           </div>
         </div>
