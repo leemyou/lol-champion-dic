@@ -28,8 +28,8 @@ export const useFilter = () => {
   );
 
   return {
+    filterOptions: filter,
     language: filter.language,
-    nodeLinks: [...filter.relation, ...filter.region],
     onChangeLanguage,
     onChangeRelation,
     onChangeRegion,

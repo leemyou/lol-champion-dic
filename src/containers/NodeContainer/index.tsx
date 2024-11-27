@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import baseRegionData from "@assets/data/baseRegionData.json";
 import championRegionData from "@assets/data/championRegion.json";
 import championRelationData from "@assets/data/championRelation.json";
@@ -25,18 +31,21 @@ export const NodeContainer: React.FC = () => {
 
   const { openModal } = useModal();
   const { onAlertOpen } = useAlert();
-  const { language, nodeLinks } = useFilter();
+  const { language, filterOptions } = useFilter();
   const { searchParams } = useSearch();
-  const { data: champList, isLoading } = useChampionList({
-    language: language,
-  });
+  const { data: champList, isLoading } = useChampionList({ language });
 
-  // 그래프 데이터 처리 함수
-  const processGraphData = useMemo(() => {
-    if (isLoading) {
-      return { nodes: [{}], links: [{}] };
-    }
+  const [graphData, setGraphData] = useState(baseRegionData);
 
+  const nodeLinks = useMemo(
+    () => [...filterOptions.relation, ...filterOptions.region],
+    [filterOptions.region, filterOptions.relation]
+  );
+
+  /**
+   * 그래프 데이터 처리 함수
+   */
+  const processGraphData = useCallback(() => {
     try {
       let nodes = [...baseRegionData.nodes];
 
@@ -62,30 +71,28 @@ export const NodeContainer: React.FC = () => {
       const validLinks = allLinks
         .filter(
           (link) =>
-            nodeIdMap.has(link.source.toString()) &&
-            nodeIdMap.has(link.target.toString()) &&
+            nodeIdMap.has(link.source) &&
+            nodeIdMap.has(link.target) &&
             (!nodeLinks || nodeLinks.includes(link.relation))
         )
         .map((link) => ({
           ...link,
-          source: link.source.toString(),
-          target: link.target.toString(),
+          source: link.source,
+          target: link.target,
         }));
 
-      console.log("validLinks :", validLinks);
-
-      // 필터링된 링크에서 사용되는 노드만 포함
+      // // 필터링된 링크에서 사용되는 노드만 포함
       const usedNodeIds = new Set(
         validLinks.flatMap((link) => [link.source, link.target])
       );
+
       const filteredNodes = nodes.filter((node) => usedNodeIds.has(node.id));
 
-      let returnLinks = [...validLinks];
-
-      return {
+      setGraphData({
         nodes: filteredNodes,
-        links: returnLinks,
-      };
+        links: [...validLinks],
+      });
+      return;
     } catch (error) {
       console.error("Error processing graph data:", error);
 
@@ -94,20 +101,21 @@ export const NodeContainer: React.FC = () => {
         alertType: AlertEnum.ERROR,
       });
 
-      return {
+      setGraphData({
         nodes: [{}],
         links: [{}],
-      };
+      });
+      return;
     }
   }, [champList, nodeLinks]);
 
-  console.log(processGraphData);
+  /**
+   * 검색 시 카메라 이동 함수
+   */
+  const handleSearch = () => {
+    if (!graphData?.nodes?.length || !searchParams) return;
 
-  // 검색 기능
-  const handleSearch = useCallback(() => {
-    if (!processGraphData?.nodes?.length || !searchParams) return;
-
-    const node = processGraphData.nodes.find((value: NodeObject) => {
+    const node = graphData.nodes.find((value: NodeObject) => {
       if (!value?.name) return false;
 
       const dataValue = checkLanguageEng(value.name)
@@ -140,58 +148,75 @@ export const NodeContainer: React.FC = () => {
       node,
       2000
     );
-  }, [processGraphData, searchParams]);
+  };
 
-  // 노드 클릭 이벤트
-  const handleClickNode = useCallback(
-    (node: NodeObject) => {
-      if (node?.id) {
-        openModal(node.id as string);
-      } else {
-        onAlertOpen({
-          message:
-            "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요.",
-          alertType: AlertEnum.ERROR,
-        });
-      }
-    },
-    [openModal]
-  );
+  /**
+   * 노드 클릭 이벤트 함수
+   */
+  const handleClickNode = (node: NodeObject) => {
+    if (node?.id) {
+      openModal(node.id as string);
+    } else {
+      onAlertOpen({
+        message:
+          "챔피언 상세 정보를 불러오는데에 실패했습니다! 다시 시도해주세요.",
+        alertType: AlertEnum.ERROR,
+      });
+    }
+  };
+
+  /**
+   * 노드 오브젝트 생성 함수
+   */
+  const handleNodeObject = useCallback((node: NodeObject) => {
+    if (node.img === "") {
+      const nodeEl = document.createElement("div");
+      nodeEl.textContent = node.id?.toString() || "";
+      nodeEl.style.color = node.color;
+      nodeEl.className = "region-node-label";
+      return new CSS2DObject(nodeEl);
+    } else {
+      const lowResTexture = createLowResTexture(node.img, 0.25);
+      const material = new THREE.SpriteMaterial({ map: lowResTexture });
+      const sprite = new THREE.Sprite(material);
+      sprite.scale.set(12, 12, 12);
+
+      new THREE.TextureLoader().load(node.img, (highResTexture) => {
+        highResTexture.colorSpace = THREE.SRGBColorSpace;
+        material.map = highResTexture;
+        material.needsUpdate = true;
+      });
+
+      return sprite;
+    }
+  }, []);
+
+  // 그래프 업데이트
+  useEffect(() => {
+    if (isLoading || nodeLinks.length === 0) {
+      setGraphData({
+        nodes: [{}],
+        links: [{}],
+      });
+      return;
+    }
+
+    processGraphData();
+  }, [isLoading, champList, nodeLinks]);
 
   // 검색어 변경시 검색 실행
   useEffect(() => {
-    if (searchParams && processGraphData?.nodes?.length) {
+    if (searchParams && graphData?.nodes?.length) {
       handleSearch();
     }
-  }, [searchParams, processGraphData, handleSearch]);
+  }, [searchParams, graphData, handleSearch]);
 
   return (
     <ForceGraph3D
       ref={fgRef}
-      graphData={processGraphData}
+      graphData={graphData}
       extraRenderers={extraRenderers as unknown as THREE.Renderer[]}
-      nodeThreeObject={(node) => {
-        if (node.img === "") {
-          const nodeEl = document.createElement("div");
-          nodeEl.textContent = node.id?.toString() || "";
-          nodeEl.style.color = node.color;
-          nodeEl.className = "region-node-label";
-          return new CSS2DObject(nodeEl);
-        } else {
-          const lowResTexture = createLowResTexture(node.img, 0.25);
-          const material = new THREE.SpriteMaterial({ map: lowResTexture });
-          const sprite = new THREE.Sprite(material);
-          sprite.scale.set(12, 12, 12);
-
-          new THREE.TextureLoader().load(node.img, (highResTexture) => {
-            highResTexture.colorSpace = THREE.SRGBColorSpace;
-            material.map = highResTexture;
-            material.needsUpdate = true;
-          });
-
-          return sprite;
-        }
-      }}
+      nodeThreeObject={handleNodeObject}
       backgroundColor="#ffffff00"
       onNodeClick={handleClickNode}
       linkOpacity={0.8}
