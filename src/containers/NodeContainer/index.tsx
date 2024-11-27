@@ -35,7 +35,10 @@ export const NodeContainer: React.FC = () => {
   const { searchParams } = useSearch();
   const { data: champList, isLoading } = useChampionList({ language });
 
-  const [graphData, setGraphData] = useState(baseRegionData);
+  const [graphData, setGraphData] = useState({
+    nodes: [{ id: "", img: "" }],
+    links: [{ source: "", target: "" }],
+  });
 
   const nodeLinks = useMemo(
     () => [...filterOptions.relation, ...filterOptions.region],
@@ -102,8 +105,8 @@ export const NodeContainer: React.FC = () => {
       });
 
       setGraphData({
-        nodes: [{}],
-        links: [{}],
+        nodes: [{ id: "", img: "" }],
+        links: [{ source: "", target: "" }],
       });
       return;
     }
@@ -195,8 +198,8 @@ export const NodeContainer: React.FC = () => {
   useEffect(() => {
     if (isLoading || nodeLinks.length === 0) {
       setGraphData({
-        nodes: [{}],
-        links: [{}],
+        nodes: [{ id: "", img: "" }],
+        links: [{ source: "", target: "" }],
       });
       return;
     }
