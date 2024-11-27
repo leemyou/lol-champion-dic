@@ -14,17 +14,17 @@ const Axios = axios.create({
   },
 });
 
-// TODO: 추후 파라미터(버전, 국가) 추가 필요
+// TODO: 추후 파라미터(버전) 추가 필요
 const getChampionList = async (params: ReqChampList) => {
   return await Axios.get<ResChampList>(
-    `/14.20.1/data/${params.language}/champion.json`
+    `/14.23.1/data/${params.language}/champion.json`
   ).then((res) => res.data);
 };
 
-// TODO: 추후 파라미터(버전, 국가) 추가 필요
+// TODO: 추후 파라미터(버전) 추가 필요
 const getChampionDetail = async (param: ReqChampDetail) => {
   return await Axios.get(
-    `/14.20.1/data/${param.language}/champion/${param.champId}.json`,
+    `/14.23.1/data/${param.language}/champion/${param.champId}.json`,
     {}
   ).then((res: { data: ResChampDetail }) => res.data);
 };

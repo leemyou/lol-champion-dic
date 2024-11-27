@@ -18,47 +18,58 @@
   "links": [
     {
       "source": "Runeterra",
-      "target": "Demacia"
+      "target": "Demacia",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Noxus"
+      "target": "Noxus",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Bilgewater"
+      "target": "Bilgewater",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Freljord"
+      "target": "Freljord",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "ShadowIsles"
+      "target": "ShadowIsles",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Ixtal"
+      "target": "Ixtal",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Ionia"
+      "target": "Ionia",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Targon"
+      "target": "Targon",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Zaun"
+      "target": "Zaun",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Piltover"
+      "target": "Piltover",
+      "relation": "Region"
     },
     {
       "source": "Runeterra",
-      "target": "Shurima"
+      "target": "Shurima",
+      "relation": "Region"
     }
   ]
 }
