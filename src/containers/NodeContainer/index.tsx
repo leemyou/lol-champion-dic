@@ -115,9 +115,7 @@ export const NodeContainer: React.FC = () => {
   /**
    * 검색 시 카메라 이동 함수
    */
-  const handleSearch = () => {
-    if (!graphData?.nodes?.length || !searchParams) return;
-
+  const handleSearch = useCallback(() => {
     const node = graphData.nodes.find((value: NodeObject) => {
       if (!value?.name) return false;
 
@@ -130,6 +128,8 @@ export const NodeContainer: React.FC = () => {
 
       return dataValue === searchValue;
     }) as NodeObject;
+
+    console.log(node);
 
     if (!node) {
       onAlertOpen({
@@ -151,7 +151,7 @@ export const NodeContainer: React.FC = () => {
       node,
       2000
     );
-  };
+  }, [searchParams, graphData]);
 
   /**
    * 노드 클릭 이벤트 함수
