@@ -10,9 +10,9 @@ import {
   Skeleton,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Cancel } from "@mui/icons-material";
-import { useTheme } from "@emotion/react";
 
 type ModalProps = {
   isOpen: boolean;
